@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html lang="fa" dir="rtl">
+
+<head>
+    <meta charset="utf-8">
+    <style>
+        body {
+            width: 320px;
+            padding: 12px;
+            font-family: system-ui, sans-serif;
+            font-size: 13px;
+            background: #f9f9fb;
+            color: #222;
+        }
+
+        label {
+            font-weight: bold;
+            display: block;
+            margin: 8px 0 4px;
+        }
+
+        input,
+        select,
+        button {
+            width: 100%;
+            padding: 8px;
+            margin-bottom: 8px;
+            box-sizing: border-box;
+            border: 1px solid #ccc;
+            border-radius: 6px;
+        }
+
+        button {
+            background: #0060df;
+            color: white;
+            border: none;
+            font-weight: bold;
+            cursor: pointer;
+        }
+
+        button:hover {
+            background: #0045a3;
+        }
+
+        #applyBtn {
+            background: #3085d6;
+            display: none;
+            margin-top: 10px;
+        }
+
+        #applyBtn:hover {
+            background: #256bb4;
+        }
+
+        #status {
+            font-size: 12px;
+            color: #666;
+            text-align: center;
+            margin: 5px 0;
+        }
+
+        #previewArea {
+            max-height: 200px;
+            overflow-y: auto;
+            background: #fff;
+            border: 1px solid #ddd;
+            padding: 8px;
+            border-radius: 6px;
+            display: none;
+            text-align: left;
+            direction: ltr;
+        }
+
+        .preview-group {
+            font-weight: bold;
+            color: #0060df;
+            margin-top: 5px;
+        }
+
+        .preview-tab {
+            padding-left: 12px;
+            font-size: 11px;
+            color: #555;
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
+        }
+    </style>
+</head>
+
+<body>
+    <h3>تنظیمات هوش مصنوعی</h3>
+
+    <label>Base URL:</label>
+    <input type="text" id="baseUrl" value="https://openrouter.ai/api/v1" />
+
+    <label>API Key:</label>
+    <input type="password" id="apiKey" placeholder="Bearer API Key..." />
+
+    <label>Model Name:</label>
+    <input type="text" id="modelName" value="google/gemini-2.5-flash" />
+
+    <label>محدودیت تعداد تب:</label>
+    <select id="tabLimit">
+        <option value="all">همه تب‌های مجاز</option>
+        <option value="10">۱۰ تب اول</option>
+        <option value="20">۲۰ تب اول</option>
+        <option value="50">۵۰ تب اول</option>
+    </select>
+
+    <button id="analyzeBtn">آنالیز و پیش‌نمایش</button>
+    <div id="status"></div>
+
+    <div id="previewArea"></div>
+    <button id="applyBtn">تایید و اعمال گروه‌بندی</button>
+
+    <script src="popup.js"></script>
+</body>
+
+</html>

@@ -1,0 +1,18 @@
+{
+    "manifest_version": 3,
+    "name": "AI Tab Grouper Pro",
+    "version": "2.1",
+    "permissions": [
+        "tabs",
+        "tabGroups",
+        "storage"
+    ],
+    "background": {
+        "scripts": [
+            "background.js"
+        ]
+    },
+    "action": {
+        "default_popup": "popup.html"
+    }
+}
