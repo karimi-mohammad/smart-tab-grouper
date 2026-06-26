@@ -2,7 +2,8 @@ let appState = {
     isAnalyzing: false,
     computedGroups: null,
     eligibleTabs: [],
-    statusText: ""
+    statusText: "",
+    existingGroupNames: []
 };
 
 const delay = ms => new Promise(res => setTimeout(res, ms));
@@ -23,6 +24,7 @@ browser.runtime.onMessage.addListener((message, sender, sendResponse) => {
         appState.computedGroups = null;
         appState.eligibleTabs = [];
         appState.statusText = "";
+        appState.existingGroupNames = [];
         sendResponse({ success: true });
     }
     return true;
@@ -38,10 +40,12 @@ async function runAnalysis(settings) {
 
         // استخراج گروه های فعلی
         let existingGroupsMap = {};
+        appState.existingGroupNames = [];
         try {
             const groups = await browser.tabGroups.query({ windowId: browser.windows.WINDOW_ID_CURRENT });
             for (const g of groups) {
                 existingGroupsMap[g.id] = { title: g.title, tabs: [] };
+                if (g.title) appState.existingGroupNames.push(g.title);
             }
         } catch (e) { }
 
@@ -55,7 +59,7 @@ async function runAnalysis(settings) {
 
         let eligibleTabs = tabs.filter(t => !t.pinned && t.groupId === -1);
         if (eligibleTabs.length === 0) {
-            appState.statusText = "تب بدون گروهی پیدا نشد.";
+            appState.statusText = "noUngrouped";
             appState.isAnalyzing = false;
             return;
         }
@@ -119,10 +123,10 @@ ${JSON.stringify(tabListData, null, 2)}`;
         }
 
         appState.computedGroups = JSON.parse(aiTextResponse);
-        appState.statusText = "تحلیل انجام شد. پیش‌نمایش را بررسی کنید:";
+        appState.statusText = "analysisDone";
     } catch (error) {
         console.error(error);
-        appState.statusText = "خطا در پردازش هوش مصنوعی. لطفاً دوباره تلاش کنید.";
+        appState.statusText = "aiError";
     } finally {
         appState.isAnalyzing = false;
     }

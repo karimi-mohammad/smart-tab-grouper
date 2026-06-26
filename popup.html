@@ -4,115 +4,505 @@
 <head>
     <meta charset="utf-8">
     <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+
         body {
-            width: 320px;
-            padding: 12px;
-            font-family: system-ui, sans-serif;
+            width: 360px;
+            min-height: 320px;
+            font-family: system-ui, 'Segoe UI', Tahoma, sans-serif;
             font-size: 13px;
-            background: #f9f9fb;
-            color: #222;
+            background: linear-gradient(145deg, #f0f2f5 0%, #e8ecf1 100%);
+            color: #1a1a2e;
+            padding: 0;
+            overflow-x: hidden;
         }
 
-        label {
-            font-weight: bold;
-            display: block;
-            margin: 8px 0 4px;
-        }
+        ::-webkit-scrollbar { width: 6px; }
+        ::-webkit-scrollbar-track { background: transparent; }
+        ::-webkit-scrollbar-thumb { background: #c0c4cc; border-radius: 8px; }
+        ::-webkit-scrollbar-thumb:hover { background: #a0a4ac; }
 
-        input,
-        select,
-        button {
-            width: 100%;
-            padding: 8px;
-            margin-bottom: 8px;
-            box-sizing: border-box;
-            border: 1px solid #ccc;
-            border-radius: 6px;
+        .header {
+            background: linear-gradient(135deg, #1a1a2e 0%, #16213e 50%, #0f3460 100%);
+            padding: 14px 18px;
+            border-bottom: 3px solid #e94560;
+            display: flex;
+            align-items: center;
+            gap: 10px;
         }
+        .header-icon { font-size: 22px; line-height: 1; }
+        .header-title { font-size: 16px; font-weight: 700; color: #fff; letter-spacing: 0.3px; }
+        .header-sub { font-size: 10px; color: rgba(255,255,255,0.55); margin-top: 1px; }
 
-        button {
-            background: #0060df;
-            color: white;
-            border: none;
-            font-weight: bold;
+        .lang-toggle-btn {
+            background: rgba(255,255,255,0.12);
+            border: 1px solid rgba(255,255,255,0.2);
+            color: #fff;
+            font-size: 11px; font-weight: 600;
+            padding: 3px 8px;
+            border-radius: 14px;
             cursor: pointer;
+            transition: background 0.2s;
+            font-family: inherit;
+            white-space: nowrap;
+            flex-shrink: 0;
+        }
+        .lang-toggle-btn:hover { background: rgba(255,255,255,0.22); }
+
+        .card {
+            background: #fff;
+            margin: 8px 10px;
+            border-radius: 12px;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.06), 0 1px 2px rgba(0,0,0,0.04);
+            padding: 12px 14px 10px;
+            transition: box-shadow 0.25s ease;
+        }
+        .card:hover { box-shadow: 0 4px 16px rgba(0,0,0,0.10), 0 2px 4px rgba(0,0,0,0.06); }
+
+        .card-label {
+            font-size: 11px; font-weight: 600; color: #555;
+            display: block; margin-bottom: 3px;
+            text-transform: uppercase; letter-spacing: 0.5px;
         }
 
-        button:hover {
-            background: #0045a3;
+        /* ---- Input wrapper (for feedback / toggle) ---- */
+        .input-wrap {
+            position: relative;
+            margin-bottom: 6px;
+        }
+        .input-wrap input, .input-wrap select {
+            width: 100%;
+            padding: 8px 10px;
+            font-size: 13px; font-family: inherit;
+            border: 1.5px solid #d1d5db;
+            border-radius: 8px;
+            background: #fafbfc;
+            color: #1a1a2e;
+            transition: border-color 0.2s, box-shadow 0.2s, background 0.2s;
+            outline: none;
+        }
+        .input-wrap input:focus, .input-wrap select:focus {
+            border-color: #0f3460;
+            background: #fff;
+            box-shadow: 0 0 0 3px rgba(15,52,96,0.12);
+        }
+        .input-wrap input::placeholder { color: #aaa; }
+
+        .input-wrap select {
+            cursor: pointer;
+            appearance: none;
+            background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' viewBox='0 0 24 24' fill='none' stroke='%23666' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpolyline points='6 9 12 15 18 9'%3E%3C/polyline%3E%3C/svg%3E");
+            background-repeat: no-repeat;
+            background-position: left 10px center;
+            padding-left: 30px;
         }
 
-        #applyBtn {
-            background: #3085d6;
-            display: none;
-            margin-top: 10px;
+        /* save feedback badge */
+        .save-badge {
+            position: absolute;
+            top: 50%;
+            transform: translateY(-50%);
+            font-size: 10px;
+            color: #1e7e34;
+            background: #d3f0df;
+            padding: 2px 8px;
+            border-radius: 20px;
+            opacity: 0;
+            transition: opacity 0.25s, transform 0.25s;
+            pointer-events: none;
+            white-space: nowrap;
+        }
+        body[dir="rtl"] .save-badge { left: 8px; }
+        body[dir="ltr"] .save-badge { right: 8px; }
+        .save-badge.show {
+            opacity: 1;
         }
 
-        #applyBtn:hover {
-            background: #256bb4;
+        /* api key toggle */
+        .api-toggle {
+            position: absolute;
+            top: 50%;
+            transform: translateY(-50%);
+            background: none;
+            border: none;
+            cursor: pointer;
+            font-size: 15px;
+            line-height: 1;
+            opacity: 0.5;
+            transition: opacity 0.2s;
+            padding: 2px;
+        }
+        body[dir="rtl"] .api-toggle { left: 8px; }
+        body[dir="ltr"] .api-toggle { right: 8px; }
+        .api-toggle:hover { opacity: 1; }
+
+        /* ---- Buttons ---- */
+        .btn {
+            padding: 9px 14px;
+            border: none;
+            border-radius: 8px;
+            font-size: 13px; font-weight: 700;
+            cursor: pointer;
+            transition: all 0.25s;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            gap: 6px;
+            font-family: inherit;
+        }
+        .btn:active { transform: scale(0.97); }
+
+        .btn-primary {
+            background: linear-gradient(135deg, #0f3460, #1a1a2e);
+            color: #fff;
+            box-shadow: 0 3px 10px rgba(15,52,96,0.3);
+            width: 100%;
+        }
+        .btn-primary:hover:not(:disabled) {
+            box-shadow: 0 5px 18px rgba(15,52,96,0.4);
+            transform: translateY(-1px);
+        }
+        .btn-primary:disabled {
+            opacity: 0.6; cursor: not-allowed; transform: none; box-shadow: none;
         }
 
-        #status {
-            font-size: 12px;
-            color: #666;
-            text-align: center;
-            margin: 5px 0;
+        .btn-success {
+            background: linear-gradient(135deg, #2d6a4f, #40916c);
+            color: #fff;
+            box-shadow: 0 3px 10px rgba(45,106,79,0.3);
+            width: 100%;
+        }
+        .btn-success:hover {
+            box-shadow: 0 5px 18px rgba(45,106,79,0.4);
+            transform: translateY(-1px);
         }
 
+        .btn-outline {
+            background: transparent;
+            color: #0f3460;
+            border: 1.5px solid #d1d5db;
+        }
+        .btn-outline:hover { border-color: #0f3460; background: rgba(15,52,96,0.04); }
+        .btn-outline-sm {
+            font-size: 11px; padding: 5px 10px;
+        }
+        .btn-danger-outline {
+            background: transparent;
+            color: #b91c1c;
+            border: 1.5px solid #f5b7b1;
+            font-size: 11px; padding: 5px 10px;
+        }
+        .btn-danger-outline:hover { background: #fde8e8; }
+
+        .btn-success:disabled {
+            opacity: 0.6; cursor: not-allowed; transform: none; box-shadow: none;
+        }
+
+        .row {
+            display: flex;
+            gap: 6px;
+            align-items: center;
+        }
+        .row .btn { flex: 1; }
+        .row .btn-outline, .row .btn-danger-outline { flex: 0 0 auto; }
+
+        /* ---- spinner ---- */
+        .spinner {
+            display: inline-block;
+            width: 16px; height: 16px;
+            border: 2.5px solid rgba(255,255,255,0.3);
+            border-top-color: #fff;
+            border-radius: 50%;
+            animation: spin 0.7s linear infinite;
+        }
+        @keyframes spin { to { transform: rotate(360deg); } }
+        .btn.loading .spinner { margin-left: 6px; }
+
+        /* ---- status box ---- */
+        .status-box {
+            padding: 9px 12px;
+            border-radius: 8px;
+            font-size: 12px; line-height: 1.5;
+            margin: 6px 10px 4px;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            animation: fadeSlideIn 0.3s;
+            transition: opacity 0.3s;
+        }
+        .status-box.info { background: #e8f0fe; color: #1a56db; border: 1px solid #b3d4ff; }
+        .status-box.success { background: #d3f0df; color: #1e7e34; border: 1px solid #a3d9b1; }
+        .status-box.error { background: #fde8e8; color: #b91c1c; border: 1px solid #f5b7b1; }
+        .status-box.warn { background: #fef9e7; color: #8a6d1f; border: 1px solid #f7dc6f; }
+        .status-box.empty { display: none; }
+        .status-icon { font-size: 16px; flex-shrink: 0; }
+
+        @keyframes fadeSlideIn {
+            from { opacity: 0; transform: translateY(-6px); }
+            to   { opacity: 1; transform: translateY(0); }
+        }
+
+        /* ---- preview ---- */
         #previewArea {
+            background: #f8f9fc;
+            border: 1.5px solid #e2e6ed;
+            border-radius: 10px;
+            padding: 8px;
             max-height: 200px;
             overflow-y: auto;
-            background: #fff;
-            border: 1px solid #ddd;
-            padding: 8px;
-            border-radius: 6px;
             display: none;
-            text-align: left;
-            direction: ltr;
+            margin-top: 4px;
+            animation: fadeSlideIn 0.35s;
         }
-
         .preview-group {
-            font-weight: bold;
-            color: #0060df;
-            margin-top: 5px;
+            font-weight: 700; font-size: 12px; color: #0f3460;
+            padding: 4px 6px; margin-top: 5px;
+            background: rgba(15,52,96,0.06);
+            border-radius: 6px; border-right: 3px solid #0f3460;
+            display: flex; align-items: center; gap: 6px;
+        }
+        .preview-group:first-child { margin-top: 0; }
+        .preview-group-existing { border-right-color: #e67e22; background: rgba(230,126,34,0.07); }
+        .preview-group-label { font-size: 10px; font-weight: 500; padding: 1px 6px; border-radius: 10px; background: rgba(15,52,96,0.1); color: #555; white-space: nowrap; }
+        .preview-group-existing .preview-group-label { background: rgba(230,126,34,0.15); color: #d35400; }
+        .preview-group-count { font-size: 10px; font-weight: 500; color: #888; margin-right: auto; direction: ltr; }
+
+        .preview-tabs-container {
+            padding: 2px 0 8px 12px;
+            border-right: 1.5px solid #e2e6ed;
+            margin-right: 10px;
+        }
+        .preview-tab-icon { font-size: 10px; flex-shrink: 0; width: 14px; text-align: center; }
+        .preview-tab {
+            padding: 4px 6px 4px 6px;
+            font-size: 11px; color: #333;
+            white-space: nowrap; overflow: hidden; text-overflow: ellipsis;
+            transition: background 0.15s; border-radius: 4px;
+            display: flex; align-items: center; gap: 5px;
+            cursor: default;
+        }
+        .preview-tab:hover { background: rgba(0,0,0,0.04); }
+        .preview-tab-existing { background: rgba(230,126,34,0.08); border-radius: 4px; }
+        .preview-tab-title { flex: 1; overflow: hidden; text-overflow: ellipsis; font-weight: 500; color: #1a1a2e; }
+        .preview-tab-domain { font-size: 10px; color: #999; direction: ltr; text-align: left; flex-shrink: 0; max-width: 120px; overflow: hidden; text-overflow: ellipsis; }
+
+        .hidden { display: none !important; }
+
+        #previewCard {
+            display: none;
+        }
+        #previewCard .btn-success {
+            margin-top: 6px;
         }
 
-        .preview-tab {
-            padding-left: 12px;
-            font-size: 11px;
-            color: #555;
+        /* tab count badge on header */
+        .tab-count-badge {
+            font-size: 10px;
+            color: rgba(255,255,255,0.7);
+            background: rgba(255,255,255,0.1);
+            padding: 2px 8px;
+            border-radius: 20px;
+            margin-right: auto;
             white-space: nowrap;
-            overflow: hidden;
-            text-overflow: ellipsis;
         }
+
+        /* model custom input */
+        #modelCustomWrap {
+            display: none;
+        }
+
+        /* ---- settings toggle ---- */
+        .settings-toggle-card { padding: 0; overflow: hidden; }
+        .btn-settings-toggle {
+            width: 100%;
+            padding: 10px 14px;
+            background: none;
+            border: none;
+            font-size: 13px; font-weight: 600; font-family: inherit;
+            color: #1a1a2e;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            gap: 6px;
+            transition: background 0.2s;
+        }
+        .btn-settings-toggle:hover { background: rgba(15,52,96,0.04); }
+        #settingsToggleArrow {
+            margin-right: auto;
+            transition: transform 0.25s;
+            font-size: 10px;
+        }
+        #settingsToggleArrow.open { transform: rotate(180deg); }
+
+        .experimental-badge {
+            font-size: 9px; font-weight: 600;
+            color: #d35400;
+            background: rgba(230,126,34,0.12);
+            padding: 1px 6px;
+            border-radius: 10px;
+            white-space: nowrap;
+        }
+
+        /* ---- setting row (toggle label + switch) ---- */
+        .setting-row {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            margin-bottom: 6px;
+        }
+        .setting-hint {
+            font-size: 10px; color: #999;
+            margin-bottom: 6px;
+            line-height: 1.4;
+        }
+
+        /* toggle switch */
+        .toggle-switch {
+            position: relative;
+            display: inline-block;
+            width: 36px;
+            height: 20px;
+            flex-shrink: 0;
+        }
+        .toggle-switch input { opacity: 0; width: 0; height: 0; }
+        .toggle-slider {
+            position: absolute;
+            cursor: pointer;
+            top: 0; left: 0; right: 0; bottom: 0;
+            background: #ccc;
+            border-radius: 20px;
+            transition: 0.25s;
+        }
+        .toggle-slider:before {
+            content: "";
+            position: absolute;
+            width: 16px; height: 16px;
+            left: 2px; bottom: 2px;
+            background: #fff;
+            border-radius: 50%;
+            transition: 0.25s;
+        }
+        .toggle-switch input:checked + .toggle-slider { background: #2d6a4f; }
+        .toggle-switch input:checked + .toggle-slider:before { transform: translateX(16px); }
+
+        /* connection test inline feedback */
+        .test-result {
+            font-size: 11px;
+            padding: 4px 0;
+            display: flex;
+            align-items: center;
+            gap: 4px;
+            min-height: 20px;
+        }
+        .test-result.ok { color: #1e7e34; }
+        .test-result.fail { color: #b91c1c; }
+        .test-result.wait { color: #8a6d1f; }
     </style>
 </head>
 
-<body>
-    <h3>تنظیمات هوش مصنوعی</h3>
+<body dir="rtl">
 
-    <label>Base URL:</label>
-    <input type="text" id="baseUrl" value="https://openrouter.ai/api/v1" />
+    <!-- Header -->
+    <div class="header">
+        <span class="header-icon">🤖</span>
+        <div>
+            <div class="header-title">AI Tab Grouper</div>
+            <div class="header-sub" id="headerSub" data-i18n="headerSub">گروه‌بندی هوشمند تب‌ها</div>
+        </div>
+        <span class="tab-count-badge" id="tabCountBadge">—</span>
+        <button class="lang-toggle-btn" id="langToggle" title="Toggle language">EN</button>
+    </div>
 
-    <label>API Key:</label>
-    <input type="password" id="apiKey" placeholder="Bearer API Key..." />
+    <!-- Settings Toggle -->
+    <div class="card settings-toggle-card">
+        <button class="btn btn-settings-toggle" id="settingsToggle">
+            <span id="settingsToggleText" data-i18n="settingsToggle">⚙️ تنظیمات</span>
+            <span id="settingsToggleArrow">▾</span>
+        </button>
+    </div>
 
-    <label>Model Name:</label>
-    <input type="text" id="modelName" value="google/gemini-2.5-flash" />
+    <!-- Settings Card (collapsible) -->
+    <div class="card" id="settingsCard" style="display: none;">
+        <div style="display: flex; align-items: center; gap: 6px; margin-bottom: 8px;">
+            <span class="card-label">🔗 Base URL</span>
+            <span class="experimental-badge" data-i18n="experimental">🧪 آزمایشی</span>
+        </div>
+        <div class="input-wrap" id="baseUrlWrap">
+            <input type="text" id="baseUrl" value="https://openrouter.ai/api/v1" />
+            <span class="save-badge" id="badge-baseUrl" data-i18n="saved">✓ ذخیره شد</span>
+        </div>
 
-    <label>محدودیت تعداد تب:</label>
-    <select id="tabLimit">
-        <option value="all">همه تب‌های مجاز</option>
-        <option value="10">۱۰ تب اول</option>
-        <option value="20">۲۰ تب اول</option>
-        <option value="50">۵۰ تب اول</option>
-    </select>
+        <span class="card-label">🔑 API Key</span>
+        <div class="input-wrap" id="apiKeyWrap">
+            <input type="password" id="apiKey" placeholder="sk-or-..." />
+            <button class="api-toggle" id="apiToggle" type="button" data-i18n-title="apiToggleTitle">👁️</button>
+        </div>
 
-    <button id="analyzeBtn">آنالیز و پیش‌نمایش</button>
-    <div id="status"></div>
+        <span class="card-label">🧠 Model Name</span>
+        <div class="input-wrap">
+            <select id="modelPreset">
+                <option value="google/gemini-2.5-flash">Gemini 2.5 Flash</option>
+                <option value="google/gemini-2.5-pro">Gemini 2.5 Pro</option>
+                <option value="openai/gpt-4o">GPT-4o</option>
+                <option value="openai/gpt-4o-mini">GPT-4o Mini</option>
+                <option value="anthropic/claude-sonnet-4-20250514">Claude Sonnet 4</option>
+                <option value="deepseek/deepseek-chat">DeepSeek V3</option>
+                <option value="qwen/qwq-32b">QwQ 32B</option>
+                <option value="__custom__" data-i18n="customModel">✏️ مدل سفارشی...</option>
+            </select>
+        </div>
+        <div class="input-wrap" id="modelCustomWrap">
+            <input type="text" id="modelCustom" placeholder="" data-i18n-placeholder="customModelPlaceholder" />
+            <span class="save-badge" id="badge-modelName" data-i18n="saved">✓ ذخیره شد</span>
+        </div>
 
-    <div id="previewArea"></div>
-    <button id="applyBtn">تایید و اعمال گروه‌بندی</button>
+        <span class="card-label" data-i18n="tabLimit">📊 محدودیت تعداد تب</span>
+        <div class="input-wrap">
+            <select id="tabLimit">
+                <option value="all" data-i18n="tabLimitAll">همه تب‌های مجاز</option>
+                <option value="10" data-i18n="tabLimit10">۱۰ تب اول</option>
+                <option value="20" data-i18n="tabLimit20">۲۰ تب اول</option>
+                <option value="50" data-i18n="tabLimit50">۵۰ تب اول</option>
+            </select>
+        </div>
+
+        <!-- Backup toggle -->
+        <div class="setting-row">
+            <span class="card-label" style="margin-bottom: 0;" data-i18n="autoBackup">💾 بکاپ خودکار</span>
+            <label class="toggle-switch">
+                <input type="checkbox" id="backupToggle" checked />
+                <span class="toggle-slider"></span>
+            </label>
+        </div>
+        <div class="setting-hint" id="backupHint" data-i18n="backupHint">قبل از اعمال گروه‌بندی، یک فایل JSON بکاپ از تب‌ها ذخیره می‌شود.</div>
+
+        <!-- actions row -->
+        <div class="row" style="margin-top: 6px;">
+            <button class="btn btn-outline btn-outline-sm" id="testBtn" title="" data-i18n="testConnection" data-i18n-title="testConnection">🔄 تست اتصال</button>
+            <button class="btn btn-danger-outline" id="clearBtn" data-i18n="clearSettings">🗑 پاک کردن تنظیمات</button>
+        </div>
+        <div class="test-result" id="testResult"></div>
+    </div>
+
+    <!-- Action Card -->
+    <div class="card" style="padding-bottom: 12px;">
+        <button class="btn btn-primary" id="analyzeBtn">
+            <span id="analyzeBtnText" data-i18n="analyzeBtn">🔍 آنالیز و پیش‌نمایش</span>
+        </button>
+    </div>
+
+    <!-- Status -->
+    <div id="status" class="status-box empty">
+        <span class="status-icon" id="statusIcon">ℹ️</span>
+        <span id="statusText"></span>
+    </div>
+
+    <!-- Preview Card -->
+    <div class="card" id="previewCard">
+        <span class="card-label" data-i18n="previewLabel">📋 پیش‌نمایش گروه‌بندی</span>
+        <div id="previewArea"></div>
+        <button class="btn btn-success" id="applyBtn" data-i18n="applyBtn">✅ تایید و اعمال گروه‌بندی</button>
+    </div>
 
     <script src="popup.js"></script>
 </body>
