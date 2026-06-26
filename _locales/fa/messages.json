@@ -1,0 +1,202 @@
+{
+  "extensionName": {
+    "message": "گروه‌بندی هوشمند تب‌ها با هوش مصنوعی",
+    "description": "نام افزونه"
+  },
+  "extensionDescription": {
+    "message": "دسته‌بندی و گروه‌بندی خودکار تب‌های مرورگر با استفاده از مدل‌های هوش مصنوعی OpenRouter.",
+    "description": "توضیحات افزونه"
+  },
+  "headerTitle": {
+    "message": "AI Tab Grouper",
+    "description": "عنوان هدر"
+  },
+  "headerSub": {
+    "message": "گروه‌بندی هوشمند تب‌ها",
+    "description": "زیرعنوان هدر"
+  },
+  "settingsToggle": {
+    "message": "⚙️ تنظیمات",
+    "description": "دکمه نمایش تنظیمات"
+  },
+  "experimental": {
+    "message": "🧪 آزمایشی",
+    "description": "برچسب آزمایشی"
+  },
+  "saved": {
+    "message": "✓ ذخیره شد",
+    "description": "برچسب ذخیره شد"
+  },
+  "customModel": {
+    "message": "✏️ مدل سفارشی...",
+    "description": "گزینه مدل سفارشی"
+  },
+  "customModelPlaceholder": {
+    "message": "نام مدل را وارد کنید...",
+    "description": "محل ورود نام مدل سفارشی"
+  },
+  "tabLimit": {
+    "message": "📊 محدودیت تعداد تب",
+    "description": "برچسب محدودیت تب"
+  },
+  "tabLimitAll": {
+    "message": "همه تب‌های مجاز",
+    "description": "گزینه همه تب‌ها"
+  },
+  "tabLimit10": {
+    "message": "۱۰ تب اول",
+    "description": "گزینه ۱۰ تب اول"
+  },
+  "tabLimit20": {
+    "message": "۲۰ تب اول",
+    "description": "گزینه ۲۰ تب اول"
+  },
+  "tabLimit50": {
+    "message": "۵۰ تب اول",
+    "description": "گزینه ۵۰ تب اول"
+  },
+  "autoBackup": {
+    "message": "💾 بکاپ خودکار",
+    "description": "برچسب بکاپ خودکار"
+  },
+  "backupHint": {
+    "message": "قبل از اعمال گروه‌بندی، یک فایل JSON بکاپ از تب‌ها ذخیره می‌شود.",
+    "description": "راهنمای بکاپ"
+  },
+  "testConnection": {
+    "message": "🔄 تست اتصال",
+    "description": "دکمه تست اتصال"
+  },
+  "clearSettings": {
+    "message": "🗑 پاک کردن تنظیمات",
+    "description": "دکمه پاک کردن تنظیمات"
+  },
+  "analyzeBtn": {
+    "message": "🔍 آنالیز و پیش‌نمایش",
+    "description": "متن دکمه آنالیز"
+  },
+  "previewLabel": {
+    "message": "📋 پیش‌نمایش گروه‌بندی",
+    "description": "برچسب کارت پیش‌نمایش"
+  },
+  "applyBtn": {
+    "message": "✅ تایید و اعمال گروه‌بندی",
+    "description": "متن دکمه اعمال"
+  },
+  "analyzing": {
+    "message": "در حال تحلیل...",
+    "description": "وضعیت تحلیل"
+  },
+  "analyzingAI": {
+    "message": "در حال ارتباط با هوش مصنوعی...",
+    "description": "وضعیت اتصال به هوش مصنوعی"
+  },
+  "noUngrouped": {
+    "message": "تب بدون گروهی پیدا نشد.",
+    "description": "پیام عدم وجود تب بدون گروه"
+  },
+  "analyzingGroups": {
+    "message": "در حال آنالیز گروه‌ها و ارسال به AI...",
+    "description": "وضعیت آنالیز گروه‌ها"
+  },
+  "analysisDone": {
+    "message": "تحلیل انجام شد. پیش‌نمایش را بررسی کنید:",
+    "description": "وضعیت پایان تحلیل"
+  },
+  "aiError": {
+    "message": "خطا در پردازش هوش مصنوعی. لطفاً دوباره تلاش کنید.",
+    "description": "خطای هوش مصنوعی"
+  },
+  "fillSettings": {
+    "message": "لطفاً تمام فیلدهای تنظیمات را پر کنید.",
+    "description": "هشدار تکمیل تنظیمات"
+  },
+  "backupProgress": {
+    "message": "در حال ایجاد نسخه پشتیبان...",
+    "description": "وضعیت بکاپ"
+  },
+  "applying": {
+    "message": "در حال اعمال گروه‌بندی...",
+    "description": "وضعیت اعمال"
+  },
+  "success": {
+    "message": "تمام تب‌ها با موفقیت گروه‌بندی شدند! 🎉",
+    "description": "وضعیت موفقیت"
+  },
+  "applyError": {
+    "message": "خطا در اعمال تغییرات پس‌زمینه.",
+    "description": "خطای اعمال"
+  },
+  "backupError": {
+    "message": "خطا در زمان بک‌آپ یا شروع عملیات.",
+    "description": "خطای بکاپ"
+  },
+  "settingsCleared": {
+    "message": "تمام تنظیمات پاک شد.",
+    "description": "تنظیمات پاک شد"
+  },
+  "testPleaseFill": {
+    "message": "❌ لطفاً Base URL و API Key را وارد کنید.",
+    "description": "تست - لطفاً پر کنید"
+  },
+  "testProgress": {
+    "message": "⏳ در حال تست اتصال...",
+    "description": "وضعیت تست"
+  },
+  "testOk": {
+    "message": "✅ اتصال موفق! API معتبر است.",
+    "description": "تست موفق"
+  },
+  "test401": {
+    "message": "❌ خطای 401: کلید API نامعتبر است.",
+    "description": "خطای 401 تست"
+  },
+  "test402": {
+    "message": "⚠️ حساب اعتبار کافی ندارد (402).",
+    "description": "خطای 402 تست"
+  },
+  "testStatus": {
+    "message": "❌ خطای $1: لطفاً اطلاعات را بررسی کنید.",
+    "description": "خطای عمومی تست با کد وضعیت"
+  },
+  "testNetwork": {
+    "message": "❌ خطای شبکه: آدرس API را بررسی کنید.",
+    "description": "خطای شبکه تست"
+  },
+  "apiToggleTitle": {
+    "message": "نمایش/مخفی",
+    "description": "عنوان دکنه تغییر وضعیت کلید API"
+  },
+  "newGroup": {
+    "message": "🆕 گروه جدید",
+    "description": "برچسب گروه جدید"
+  },
+  "existingGroup": {
+    "message": "➕ گروه موجود",
+    "description": "برچسب گروه موجود"
+  },
+  "langFa": {
+    "message": "FA",
+    "description": "کد زبان فارسی"
+  },
+  "langEn": {
+    "message": "EN",
+    "description": "کد زبان انگلیسی"
+  },
+  "langTitleFa": {
+    "message": "تغییر به فارسی",
+    "description": "راهنمای دکمه تغییر زبان وقتی انگلیسی است"
+  },
+  "langTitleEn": {
+    "message": "تغییر به انگلیسی",
+    "description": "راهنمای دکمه تغییر زبان وقتی فارسی است"
+  },
+  "tabCountLabel": {
+    "message": "$1 تب",
+    "description": "برچسب تعداد تب‌ها. $1 عدد تب است"
+  },
+  "previewTabs": {
+    "message": "تب",
+    "description": "برچسب تب در پیش‌نمایش"
+  }
+}

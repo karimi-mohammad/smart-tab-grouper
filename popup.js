@@ -1,113 +1,27 @@
-/* ── Bilingual i18n system (FA / EN) ── */
+/* ── Bilingual i18n system (loads from _locales/) ── */
 const i18n = {
     currentLang: 'en',
+    strings: { fa: {}, en: {} },
 
-    strings: {
-        fa: {
-            headerSub: 'گروه‌بندی هوشمند تب‌ها',
-            settingsToggle: '⚙️ تنظیمات',
-            experimental: '🧪 آزمایشی',
-            saved: '✓ ذخیره شد',
-            customModel: '✏️ مدل سفارشی...',
-            customModelPlaceholder: 'نام مدل را وارد کنید...',
-            tabLimit: '📊 محدودیت تعداد تب',
-            tabLimitAll: 'همه تب‌های مجاز',
-            tabLimit10: '۱۰ تب اول',
-            tabLimit20: '۲۰ تب اول',
-            tabLimit50: '۵۰ تب اول',
-            autoBackup: '💾 بکاپ خودکار',
-            backupHint: 'قبل از اعمال گروه‌بندی، یک فایل JSON بکاپ از تب‌ها ذخیره می‌شود.',
-            testConnection: '🔄 تست اتصال',
-            clearSettings: '🗑 پاک کردن تنظیمات',
-            analyzeBtn: '🔍 آنالیز و پیش‌نمایش',
-            previewLabel: '📋 پیش‌نمایش گروه‌بندی',
-            applyBtn: '✅ تایید و اعمال گروه‌بندی',
-            analyzing: 'در حال تحلیل...',
-            analyzingAI: 'در حال ارتباط با هوش مصنوعی...',
-            noUngrouped: 'تب بدون گروهی پیدا نشد.',
-            analyzingGroups: 'در حال آنالیز گروه‌ها و ارسال به AI...',
-            analysisDone: 'تحلیل انجام شد. پیش‌نمایش را بررسی کنید:',
-            aiError: 'خطا در پردازش هوش مصنوعی. لطفاً دوباره تلاش کنید.',
-            fillSettings: 'لطفاً تمام فیلدهای تنظیمات را پر کنید.',
-            backupProgress: 'در حال ایجاد نسخه پشتیبان...',
-            applying: 'در حال اعمال گروه‌بندی...',
-            success: 'تمام تب‌ها با موفقیت در بک‌گراند مرتب شدند! 🎉',
-            applyError: 'خطا در اعمال تغییرات بک‌گراند.',
-            backupError: 'خطا در زمان بک‌آپ یا شروع عملیات.',
-            settingsCleared: 'تمام تنظیمات پاک شد.',
-            testTitle: 'تست اتصال به API',
-            testPleaseFill: '❌ لطفاً Base URL و API Key را وارد کنید.',
-            testProgress: '⏳ در حال تست اتصال...',
-            testOk: '✅ اتصال موفق! API معتبر است.',
-            test401: '❌ خطای 401: کلید API نامعتبر است.',
-            test402: '⚠️ حساب اعتبار کافی ندارد (402).',
-            testStatus: code => `❌ خطای ${code}: لطفاً اطلاعات را بررسی کنید.`,
-            testNetwork: '❌ خطای شبکه: آدرس API را بررسی کنید.',
-            apiToggleTitle: 'نمایش/مخفی',
-            newGroup: '🆕 گروه جدید',
-            existingGroup: '➕ گروه موجود',
-            langFa: 'FA',
-            langEn: 'EN',
-            langTitleFa: 'تغییر به انگلیسی',
-            langTitleEn: 'Switch to Persian',
-            tabCountLabel: count => `${count} تب`,
-            previewTabs: 'تب',
-        },
-        en: {
-            headerSub: 'Smart Tab Grouping',
-            settingsToggle: '⚙️ Settings',
-            experimental: '🧪 Experimental',
-            saved: '✓ Saved',
-            customModel: '✏️ Custom model...',
-            customModelPlaceholder: 'Enter model name...',
-            tabLimit: '📊 Tab Limit',
-            tabLimitAll: 'All eligible tabs',
-            tabLimit10: 'First 10 tabs',
-            tabLimit20: 'First 20 tabs',
-            tabLimit50: 'First 50 tabs',
-            autoBackup: '💾 Auto Backup',
-            backupHint: 'Saves a JSON backup of tabs before applying grouping.',
-            testConnection: '🔄 Test Connection',
-            clearSettings: '🗑 Clear Settings',
-            analyzeBtn: '🔍 Analyze & Preview',
-            previewLabel: '📋 Grouping Preview',
-            applyBtn: '✅ Apply Grouping',
-            analyzing: 'Analyzing...',
-            analyzingAI: 'Connecting to AI...',
-            noUngrouped: 'No ungrouped tabs found.',
-            analyzingGroups: 'Analyzing groups and sending to AI...',
-            analysisDone: 'Analysis complete. Check the preview:',
-            aiError: 'AI processing error. Please try again.',
-            fillSettings: 'Please fill in all settings fields.',
-            backupProgress: 'Creating backup...',
-            applying: 'Applying grouping...',
-            success: 'All tabs grouped successfully! 🎉',
-            applyError: 'Error applying background changes.',
-            backupError: 'Error during backup or operation.',
-            settingsCleared: 'All settings cleared.',
-            testTitle: 'Test API Connection',
-            testPleaseFill: '❌ Please enter Base URL and API Key.',
-            testProgress: '⏳ Testing connection...',
-            testOk: '✅ Connection successful! API is valid.',
-            test401: '❌ Error 401: Invalid API Key.',
-            test402: '⚠️ Insufficient credits (402).',
-            testStatus: code => `❌ Error ${code}: Please check your settings.`,
-            testNetwork: '❌ Network error: Check your API URL.',
-            apiToggleTitle: 'Show/Hide',
-            newGroup: '🆕 New Group',
-            existingGroup: '➕ Existing Group',
-            langFa: 'FA',
-            langEn: 'EN',
-            langTitleFa: 'Switch to English',
-            langTitleEn: 'تغییر به فارسی',
-            tabCountLabel: count => `${count} tabs`,
-            previewTabs: 'tabs',
+    async loadMessages(lang) {
+        const url = browser.runtime.getURL(`_locales/${lang}/messages.json`);
+        const response = await fetch(url);
+        const data = await response.json();
+        const result = {};
+        for (const [key, value] of Object.entries(data)) {
+            result[key] = value.message;
         }
+        return result;
     },
 
     get(key, ...args) {
         let val = this.strings[this.currentLang][key];
-        if (typeof val === 'function') return val(...args);
+        if (!val) return key;
+        if (args.length) {
+            args.forEach((arg, i) => {
+                val = val.replace(`$${i + 1}`, arg);
+            });
+        }
         return val;
     },
 
@@ -160,7 +74,7 @@ const i18n = {
         }
     },
 
-    toggle() {
+    async toggle() {
         this.currentLang = this.currentLang === 'fa' ? 'en' : 'fa';
         browser.storage.local.set({ lang: this.currentLang });
         this.applyLanguage();
@@ -169,8 +83,18 @@ const i18n = {
     },
 
     async init() {
+        // Load both locale files
+        this.strings.fa = await this.loadMessages('fa');
+        this.strings.en = await this.loadMessages('en');
+
         const data = await browser.storage.local.get(['lang']);
-        if (data.lang) this.currentLang = data.lang;
+        if (data.lang) {
+            this.currentLang = data.lang;
+        } else {
+            // Default: follow browser locale
+            const uiLang = browser.i18n.getUILanguage();
+            this.currentLang = uiLang.startsWith('fa') ? 'fa' : 'en';
+        }
         this.applyLanguage();
     }
 };
@@ -198,7 +122,7 @@ document.addEventListener('DOMContentLoaded', async () => {
         document.getElementById('backupToggle').checked = false;
     }
 
-    // Init i18n
+    // Init i18n (loads _locales/ files)
     await i18n.init();
 
     updateTabCount();

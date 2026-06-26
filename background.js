@@ -33,7 +33,7 @@ browser.runtime.onMessage.addListener((message, sender, sendResponse) => {
 async function runAnalysis(settings) {
     appState.isAnalyzing = true;
     appState.computedGroups = null;
-    appState.statusText = "در حال آنالیز گروه‌ها و ارسال به AI...";
+    appState.statusText = "analyzingGroups";
 
     try {
         let tabs = await browser.tabs.query({ currentWindow: true });

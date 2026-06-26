@@ -1,0 +1,202 @@
+{
+  "extensionName": {
+    "message": "Smart Tab Grouper AI",
+    "description": "Extension name"
+  },
+  "extensionDescription": {
+    "message": "Automatically group your opened tabs using OpenRouter AI models.",
+    "description": "Extension description"
+  },
+  "headerTitle": {
+    "message": "AI Tab Grouper",
+    "description": "Header title"
+  },
+  "headerSub": {
+    "message": "Smart Tab Grouping",
+    "description": "Header subtitle"
+  },
+  "settingsToggle": {
+    "message": "⚙️ Settings",
+    "description": "Settings toggle button"
+  },
+  "experimental": {
+    "message": "🧪 Experimental",
+    "description": "Experimental badge"
+  },
+  "saved": {
+    "message": "✓ Saved",
+    "description": "Saved badge"
+  },
+  "customModel": {
+    "message": "✏️ Custom model...",
+    "description": "Custom model option"
+  },
+  "customModelPlaceholder": {
+    "message": "Enter model name...",
+    "description": "Custom model input placeholder"
+  },
+  "tabLimit": {
+    "message": "📊 Tab Limit",
+    "description": "Tab limit label"
+  },
+  "tabLimitAll": {
+    "message": "All eligible tabs",
+    "description": "Tab limit option all"
+  },
+  "tabLimit10": {
+    "message": "First 10 tabs",
+    "description": "Tab limit option 10"
+  },
+  "tabLimit20": {
+    "message": "First 20 tabs",
+    "description": "Tab limit option 20"
+  },
+  "tabLimit50": {
+    "message": "First 50 tabs",
+    "description": "Tab limit option 50"
+  },
+  "autoBackup": {
+    "message": "💾 Auto Backup",
+    "description": "Auto backup label"
+  },
+  "backupHint": {
+    "message": "Saves a JSON backup of tabs before applying grouping.",
+    "description": "Backup hint text"
+  },
+  "testConnection": {
+    "message": "🔄 Test Connection",
+    "description": "Test connection button"
+  },
+  "clearSettings": {
+    "message": "🗑 Clear Settings",
+    "description": "Clear settings button"
+  },
+  "analyzeBtn": {
+    "message": "🔍 Analyze & Preview",
+    "description": "Analyze button text"
+  },
+  "previewLabel": {
+    "message": "📋 Grouping Preview",
+    "description": "Preview card label"
+  },
+  "applyBtn": {
+    "message": "✅ Apply Grouping",
+    "description": "Apply button text"
+  },
+  "analyzing": {
+    "message": "Analyzing...",
+    "description": "Analyzing status"
+  },
+  "analyzingAI": {
+    "message": "Connecting to AI...",
+    "description": "Analyzing AI status"
+  },
+  "noUngrouped": {
+    "message": "No ungrouped tabs found.",
+    "description": "No ungrouped tabs"
+  },
+  "analyzingGroups": {
+    "message": "Analyzing groups and sending to AI...",
+    "description": "Analyzing groups status"
+  },
+  "analysisDone": {
+    "message": "Analysis complete. Check the preview:",
+    "description": "Analysis done status"
+  },
+  "aiError": {
+    "message": "AI processing error. Please try again.",
+    "description": "AI error status"
+  },
+  "fillSettings": {
+    "message": "Please fill in all settings fields.",
+    "description": "Fill settings warning"
+  },
+  "backupProgress": {
+    "message": "Creating backup...",
+    "description": "Backup progress status"
+  },
+  "applying": {
+    "message": "Applying grouping...",
+    "description": "Applying status"
+  },
+  "success": {
+    "message": "All tabs grouped successfully! 🎉",
+    "description": "Success status"
+  },
+  "applyError": {
+    "message": "Error applying background changes.",
+    "description": "Apply error"
+  },
+  "backupError": {
+    "message": "Error during backup or operation.",
+    "description": "Backup error"
+  },
+  "settingsCleared": {
+    "message": "All settings cleared.",
+    "description": "Settings cleared"
+  },
+  "testPleaseFill": {
+    "message": "❌ Please enter Base URL and API Key.",
+    "description": "Test please fill"
+  },
+  "testProgress": {
+    "message": "⏳ Testing connection...",
+    "description": "Test progress"
+  },
+  "testOk": {
+    "message": "✅ Connection successful! API is valid.",
+    "description": "Test successful"
+  },
+  "test401": {
+    "message": "❌ Error 401: Invalid API Key.",
+    "description": "Test 401 error"
+  },
+  "test402": {
+    "message": "⚠️ Insufficient credits (402).",
+    "description": "Test 402 error"
+  },
+  "testStatus": {
+    "message": "❌ Error $1: Please check your settings.",
+    "description": "Generic test error with status code"
+  },
+  "testNetwork": {
+    "message": "❌ Network error: Check your API URL.",
+    "description": "Test network error"
+  },
+  "apiToggleTitle": {
+    "message": "Show/Hide",
+    "description": "API key toggle button title"
+  },
+  "newGroup": {
+    "message": "🆕 New Group",
+    "description": "New group label"
+  },
+  "existingGroup": {
+    "message": "➕ Existing Group",
+    "description": "Existing group label"
+  },
+  "langFa": {
+    "message": "FA",
+    "description": "Persian language code"
+  },
+  "langEn": {
+    "message": "EN",
+    "description": "English language code"
+  },
+  "langTitleFa": {
+    "message": "Switch to Persian",
+    "description": "Toggle language tooltip when in English"
+  },
+  "langTitleEn": {
+    "message": "Switch to English",
+    "description": "Toggle language tooltip when in Persian"
+  },
+  "tabCountLabel": {
+    "message": "$1 tabs",
+    "description": "Tab count badge. $1 is the number of tabs"
+  },
+  "previewTabs": {
+    "message": "tabs",
+    "description": "Tabs label in preview"
+  }
+}
